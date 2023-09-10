@@ -26,5 +26,13 @@ public class SampleProducerController {
 		return new ResponseEntity<>("Message sent.", HttpStatus.OK);
 	}
 
+	@GetMapping("/greet/{name}")
+	public ResponseEntity<String> greet(@PathVariable String name) {
+		
+		kafkaTemplate.send("greet", name);
+		
+		return new ResponseEntity<>("Greeting "+name, HttpStatus.OK);
+	}
+
 
 }
